@@ -1,0 +1,104 @@
+
+            ============================
+                Content Test
+            ============================
+            Users : alice
+            Model: v1
+            Sentence: life is beautiful
+            Expected: 1
+            Actual: 0.5994
+            ==> SUCCESS
+            
+            ============================
+                Content Test
+            ============================
+            Users : alice
+            Model: v1
+            Sentence: that sucks
+            Expected: -1
+            Actual: -0.3612
+            ==> SUCCESS
+            
+        ============================
+            Authentication Test
+        ============================
+        request done at "/permissions"
+        Username: alice
+        Password=wonderland
+        Expected result = 200
+        ==> SUCCESS
+        
+            ============================
+                Content Test
+            ============================
+            Users : alice
+            Model: v2
+            Sentence: life is beautiful
+            Expected: 1
+            Actual: 0.5994
+            ==> SUCCESS
+            
+            ============================
+                Content Test
+            ============================
+            Users : alice
+            Model: v2
+            Sentence: that sucks
+            Expected: -1
+            Actual: -0.3612
+            ==> SUCCESS
+            
+        ============================
+            Authentication Test
+        ============================
+        request done at "/permissions"
+        Username: bob
+        Password=builder
+        Expected result = 200
+        ==> SUCCESS
+        
+        ============================
+            Authentication Test
+        ============================
+        request done at "/permissions"
+        Username: clementine
+        Password=mandarine
+        Expected result = 200
+        ==> FAILURE
+        
+            ============================
+                Authorization Test
+            ============================
+            User: bob
+            Model : v1
+            Expected: 200
+            Actual: 200
+            ==> SUCCESS
+            
+            ============================
+                Authorization Test
+            ============================
+            User: bob
+            Model : v2
+            Expected: 200
+            Actual: 403
+            ==> FAILURE
+            
+            ============================
+                Authorization Test
+            ============================
+            User: alice
+            Model : v1
+            Expected: 200
+            Actual: 200
+            ==> SUCCESS
+            
+            ============================
+                Authorization Test
+            ============================
+            User: alice
+            Model : v2
+            Expected: 200
+            Actual: 200
+            ==> SUCCESS
+            

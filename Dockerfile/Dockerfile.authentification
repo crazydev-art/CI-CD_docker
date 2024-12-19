@@ -1,0 +1,23 @@
+# Utiliser une image officielle Python comme base
+FROM python:3.11-slim
+
+#  Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+#définition des variables d'environnement 
+
+ENV LOG=1
+
+# Copier le fichier des dépendances dans le conteneur
+COPY requirements.txt .
+
+# Installer les dépendances nécessaires
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier tout le code source dans le répertoire de travail
+COPY  /src/autentification.py /app/
+
+
+# 7. Spécifier la commande par défaut pour exécuter l'application
+CMD ["python", "autentification.py"]
+
