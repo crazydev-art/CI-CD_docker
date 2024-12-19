@@ -1,0 +1,65 @@
+
+
+services:
+  # Service de l'API principale
+  api:
+    image: datascientest/fastapi:1.0.0
+    container_name: api_container
+    ports:
+      - "8000:8000"
+    networks:
+      - ci_cd_network
+
+  # Service de test d'Authorization
+  authorization_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.authorization
+    container_name: authorization_container
+    networks:
+      - ci_cd_network
+    volumes:
+      - shared_logs:/shared_logs
+      #-./shared_logs:/shared_logs mount the volume locally
+    environment:
+      - LOG_FILE=/shared_logs/api_test.log
+    depends_on:
+      - api
+      
+  # Service de test d'Authentication
+  authentification_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.authentification
+    container_name: authentification_container
+    networks:
+      - ci_cd_network
+    volumes:
+      - shared_logs:/shared_logs
+      #-./shared_logs:/shared_logs mount the volume locally 
+    environment:
+      - LOG_FILE=/shared_logs/api_test.log
+    depends_on:
+      - api
+
+  # Service de test de Content
+  content_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.content
+    container_name: content_container
+    networks:
+      - ci_cd_network
+    volumes:
+      - shared_logs:/shared_logs
+      #-./shared_logs:/shared_logs mount the volume locally
+    environment:
+      - LOG_FILE=/shared_logs/api_test.log
+    depends_on:
+      - api
+
+networks:
+  ci_cd_network:
+
+volumes:
+  shared_logs:
