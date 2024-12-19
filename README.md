@@ -1,4 +1,4 @@
-Project Description
+Project Description:
 This project is designed to automate the testing of a FastAPI-based application by orchestrating a multi-container environment using Docker. It includes the following components:
 
 FastAPI Service:
